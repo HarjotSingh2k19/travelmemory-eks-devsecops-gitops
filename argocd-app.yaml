@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/HarjotSingh2k19/travelmemory-eks-devsecops-gitops.git'
     targetRevision: HEAD
-    path: helm
+    path: helm/travelmemory
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default

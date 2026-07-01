@@ -1,0 +1,12 @@
+# devops
+node_modules/
+.env
+*.tfstate
+*.tfstate.backup
+.terraform/
+terraform.tfvars
+*.pem
+
+tfplan
+tfplan
+devops/ansible/inventory.ini
