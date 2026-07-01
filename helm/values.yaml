@@ -1,3 +1,10 @@
+# Moving parts managed by Helm parameters
+backendImage:
+  repository: "446056240219.dkr.ecr.ap-south-1.amazonaws.com/travelmemory-backend"
+
+frontendImage:
+  repository: "446056240219.dkr.ecr.ap-south-1.amazonaws.com/travelmemory-frontend"
+
+# The global unified image tag changed dynamically by Jenkins CI
 image:
-  repository: 446056240219.dkr.ecr.ap-south-1.amazonaws.com/travelmemory-backend
-  tag: "1"
+  tag: "9"
