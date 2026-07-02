@@ -10,8 +10,14 @@ metadata:
     # Routes traffic directly to the Pod IPs (highly efficient)
     alb.ingress.kubernetes.io/target-type: ip
 
-    alb.ingress.kubernetes.io/healthcheck-path: /api/hello
-    alb.ingress.kubernetes.io/healthcheck-port: '3000'
+    # Backend Health Check
+    alb.ingress.kubernetes.io/healthcheck-path-backend: /api/hello
+    alb.ingress.kubernetes.io/healthcheck-port-backend: '3000'
+    
+    # Frontend Health Check (Nginx usually serves index.html at /)
+    alb.ingress.kubernetes.io/healthcheck-path-frontend: /
+    alb.ingress.kubernetes.io/healthcheck-port-frontend: '80'
+    
     alb.ingress.kubernetes.io/success-codes: '200'
 
 spec:
