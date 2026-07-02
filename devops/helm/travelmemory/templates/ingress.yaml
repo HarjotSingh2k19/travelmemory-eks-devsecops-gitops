@@ -11,14 +11,10 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
 
     # Backend Health Check
-    alb.ingress.kubernetes.io/healthcheck-path-backend: /api/hello
-    alb.ingress.kubernetes.io/healthcheck-port-backend: '3000'
+    # in backend-service.yaml (because it was giving error in ingress.yaml)
     
-    # Frontend Health Check (Nginx usually serves index.html at /)
-    alb.ingress.kubernetes.io/healthcheck-path-frontend: /
-    alb.ingress.kubernetes.io/healthcheck-port-frontend: '80'
-    
-    alb.ingress.kubernetes.io/success-codes: '200'
+    # Frontend Health Check
+    # in frontend-service.yaml (because it was giving error in ingress.yaml)
 
 spec:
   rules:

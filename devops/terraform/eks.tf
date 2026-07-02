@@ -27,6 +27,12 @@ module "eks" {
   }
 }
 
+resource "aws_iam_role_policy_attachment" "cloudwatch_agent_policy_attachment" {
+  # This references the IAM role created by the EKS module for the 'default' node group
+  role       = module.eks.eks_managed_node_groups["default"].iam_role_name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
+
 resource "aws_eks_addon" "cloudwatch_observability" {
   cluster_name = module.eks.cluster_name
   addon_name   = "amazon-cloudwatch-observability"

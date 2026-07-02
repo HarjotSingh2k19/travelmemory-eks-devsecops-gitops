@@ -2,6 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
+  annotations:
+   # Frontend Health Check (Nginx usually serves index.html at /)
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/healthcheck-port: '80'
+    alb.ingress.kubernetes.io/success-codes: '200'
 spec:
   selector: { app: frontend }
   ports:
