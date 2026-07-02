@@ -26,3 +26,8 @@ module "eks" {
     Project = var.cluster_name
   }
 }
+
+resource "aws_eks_addon" "cloudwatch_observability" {
+  cluster_name = module.eks.cluster_name
+  addon_name   = "amazon-cloudwatch-observability"
+}

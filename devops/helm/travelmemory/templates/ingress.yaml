@@ -9,15 +9,14 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     # Routes traffic directly to the Pod IPs (highly efficient)
     alb.ingress.kubernetes.io/target-type: ip
-    # Add these two lines to strip '/api' before it hits your pod
-    alb.ingress.kubernetes.io/rewrite-target: /$1
+
 spec:
   rules:
     - http:
         paths:
         # Backend API traffic
-          - path: /api/(.*)  # Captures everything after /api/
-            pathType: ImplementationSpecific
+          - path: /api
+            pathType: Prefix
             backend:
               service:
                 name: backend
