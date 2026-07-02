@@ -4,6 +4,9 @@ backend:
     tag: "13"
   replicaCount: 2
   port: 3000
+  env:
+    - name: AWS_XRAY_SDK_ENABLED
+      value: "false"
 
 frontend:
   image:

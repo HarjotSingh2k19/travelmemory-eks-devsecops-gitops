@@ -19,11 +19,11 @@ spec:
           ports:
             - containerPort: {{ .Values.backend.port }}
           livenessProbe:
-            httpGet: { path: /hello, port: 3000 }
+            httpGet: { path: /api/hello, port: 3000 }
             initialDelaySeconds: 15
             periodSeconds: 20
           readinessProbe:
-            httpGet: { path: /hello, port: 3000 }
+            httpGet: { path: /api/hello, port: 3000 }
             initialDelaySeconds: 5
             periodSeconds: 10
           env:
