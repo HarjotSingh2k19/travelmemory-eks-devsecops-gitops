@@ -10,6 +10,10 @@ metadata:
     # Routes traffic directly to the Pod IPs (highly efficient)
     alb.ingress.kubernetes.io/target-type: ip
 
+    alb.ingress.kubernetes.io/healthcheck-path: /api/hello
+    alb.ingress.kubernetes.io/healthcheck-port: '3000'
+    alb.ingress.kubernetes.io/success-codes: '200'
+
 spec:
   rules:
     - http:
