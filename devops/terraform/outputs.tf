@@ -21,3 +21,8 @@ output "ecr_backend_url" {
 output "ecr_frontend_url" {
   value = aws_ecr_repository.frontend.repository_url
 }
+
+output "load_balancer_controller_role_arn" {
+  description = "IAM Role ARN for AWS Load Balancer Controller"
+  value       = module.load_balancer_controller_irsa_role.iam_role_arn
+}
