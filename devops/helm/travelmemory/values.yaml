@@ -1,6 +1,6 @@
 backend:
   image:
-    repository: 446056240219.dkr.ecr.ap-south-1.amazonaws.com/travelmemory-backend
+    repository: 446056240219.dkr.ecrrr.ap-south-1.amazonaws.com/travelmemory-backend
     tag: "16"
   replicaCount: 2
   port: 3000
