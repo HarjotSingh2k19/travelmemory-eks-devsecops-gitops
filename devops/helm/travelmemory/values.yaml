@@ -1,7 +1,7 @@
 backend:
   image:
     repository: 446056240219.dkr.ecr.ap-south-1.amazonaws.com/travelmemory-backend
-    tag: "16"
+    tag: "18"
   replicaCount: 2
   port: 3000
   env:
@@ -11,7 +11,7 @@ backend:
 frontend:
   image:
     repository: 446056240219.dkr.ecr.ap-south-1.amazonaws.com/travelmemory-frontend
-    tag: "16"
+    tag: "18"
   replicaCount: 2
   port: 80
 
