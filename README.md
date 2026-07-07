@@ -129,7 +129,7 @@ flowchart TB
 
 ---
 
-## 📁 Repository structure (verified against `main` on GitHub)
+## 📁 Repository structure 
 
 ```text
 travelmemory-eks-devsecops-gitops/
