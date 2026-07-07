@@ -1,7 +1,7 @@
 # ☸️ TravelMemory — EKS DevSecOps Pipeline (GitOps / Infrastructure Repo)
 
 [![Terraform](https://img.shields.io/badge/IaC-Terraform-844FBA?logo=terraform&logoColor=white)](#)
-[![EKS](https://img.shields.io/badge/Kubernetes-Amazon%20EKS%201.31-FF9900?logo=amazonaws&logoColor=white)](#)
+[![EKS](https://img.shields.io/badge/Kubernetes-Amazon%20EKS%201.34-FF9900?logo=amazonaws&logoColor=white)](#)
 [![ArgoCD](https://img.shields.io/badge/GitOps-ArgoCD-EF7B4D?logo=argo&logoColor=white)](#)
 [![Helm](https://img.shields.io/badge/Packaging-Helm-0F1689?logo=helm&logoColor=white)](#)
 [![Ansible](https://img.shields.io/badge/Config-Ansible-EE0000?logo=ansible&logoColor=white)](#)
@@ -42,7 +42,7 @@ Install and verify these **before running any command below**:
 |---|---|---|
 | AWS CLI | v2.x | `aws --version` |
 | Terraform | v1.14.x (any 1.x is fine) | `terraform -version` |
-| kubectl | v1.31.x (match your cluster's minor version) | `kubectl version --client` |
+| kubectl | v1.34.x (match your cluster's minor version) | `kubectl version --client` |
 | Helm | v3.x | `helm version` |
 | Ansible | v2.15+ | `ansible --version` |
 | Docker (with `buildx`) | v24+ | `docker buildx version` |
@@ -85,7 +85,7 @@ flowchart TB
             ALB[AWS ALB<br/>via Load Balancer Controller]
         end
         subgraph Private["Private Subnets (10.0.10.0/24, 10.0.11.0/24)"]
-            subgraph EKSCluster["EKS Cluster · eks-pipeline · v1.31"]
+            subgraph EKSCluster["EKS Cluster · eks-pipeline · v1.34"]
                 NodeGroup[Managed Node Group<br/>2× t3.medium]
                 Jenkins[Jenkins<br/>Helm, gp3 StorageClass, Kaniko builds]
                 ArgoCD[ArgoCD<br/>self-heal + prune]
@@ -152,7 +152,7 @@ travelmemory-eks-devsecops-gitops/
     │   └── .terraform.lock.hcl
     ├── ansible/
     │   ├── ansible.cfg
-    │   ├── bastion-setup.yml     ← installs AWS CLI v2, kubectl v1.31, Helm
+    │   ├── bastion-setup.yml     ← installs AWS CLI v2, kubectl v1.34, Helm
     │   ├── inventory.ini
     │   └── inventory.ini.example
     ├── helm/travelmemory/
@@ -191,7 +191,7 @@ chmod 400 ~/.ssh/eks-pipeline-key.pem
 ```
 
 > ⚠️ **EKS only supports specific Kubernetes minor versions for NEW clusters** — versions get
-> deprecated over time. This pipeline used `cluster_version = "1.31"`; verify the current
+> deprecated over time. This pipeline used `cluster_version = "1.34"`; verify the current
 > supported list before rebuilding, or you'll hit `InvalidParameterException` on apply.
 
 ### Step 1 — Terraform: the entire AWS foundation
@@ -272,8 +272,8 @@ kubectl get nodes   # expect 2 Ready nodes
 
 ```text
 NAME                                            STATUS   ROLES    AGE   VERSION
-ip-10-0-10-142.ap-south-1.compute.internal      Ready    <none>   4m    v1.31.x-eks-xxxxxxx
-ip-10-0-11-87.ap-south-1.compute.internal       Ready    <none>   4m    v1.31.x-eks-xxxxxxx
+ip-10-0-10-142.ap-south-1.compute.internal      Ready    <none>   4m    v1.34.x-eks-xxxxxxx
+ip-10-0-11-87.ap-south-1.compute.internal       Ready    <none>   4m    v1.34.x-eks-xxxxxxx
 ```
 
 ### Step 2 — Ansible: provision the bastion, then lock the cluster down
@@ -327,8 +327,8 @@ Unable to connect to the server: dial tcp <private-ip>:443: i/o timeout
     "Arn": "arn:aws:sts::<YOUR_AWS_ACCOUNT_ID>:assumed-role/eks-pipeline-bastion-role/i-xxxxxxxx"
 }
 NAME                                            STATUS   ROLES    AGE   VERSION
-ip-10-0-10-142.ap-south-1.compute.internal      Ready    <none>   9m    v1.31.x-eks-xxxxxxx
-ip-10-0-11-87.ap-south-1.compute.internal       Ready    <none>   9m    v1.31.x-eks-xxxxxxx
+ip-10-0-10-142.ap-south-1.compute.internal      Ready    <none>   9m    v1.34.x-eks-xxxxxxx
+ip-10-0-11-87.ap-south-1.compute.internal       Ready    <none>   9m    v1.34.x-eks-xxxxxxx
 ```
 
 > ⚠️ Without the security group rule opening port 443 from the bastion's SG to the cluster SG,
